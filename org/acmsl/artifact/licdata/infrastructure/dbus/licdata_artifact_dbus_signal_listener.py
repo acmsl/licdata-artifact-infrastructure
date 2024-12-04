@@ -19,10 +19,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-from org.acmsl.artifact.events.infrastructure.licdata.dbus import (
+from dbus_next import BusType
+from pythoneda.shared.artifact.events import DockerImageRequested
+from pythoneda.shared.artifact.events.infrastructure.dbus import (
     DbusDockerImageRequested,
 )
-from org.acmsl.artifact.events.licdata import DockerImageRequested
 from pythoneda.shared.infrastructure.dbus import DbusSignalListener
 from typing import Dict
 
@@ -39,7 +40,7 @@ class LicdataArtifactDbusSignalListener(DbusSignalListener):
 
     Collaborators:
         - pythoneda.shared.application.pythoneda.PythonEDA: Receives relevant domain events.
-        - org.acmsl.artifact.events.infrastructure.licdata.dbus.DbusDockerImageRequested
+        - pythoneda.shared.artifact.events.infrastructure.dbus.DbusDockerImageRequested
     """
 
     def __init__(self):
@@ -58,7 +59,7 @@ class LicdataArtifactDbusSignalListener(DbusSignalListener):
         """
         result = {}
         key = self.__class__.full_class_name(DockerImageRequested)
-        result[key] = DbusDockerImageRequested
+        result[key] = [DbusDockerImageRequested, BusType.SYSTEM]
         return result
 
 

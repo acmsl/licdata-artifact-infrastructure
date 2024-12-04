@@ -20,10 +20,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 from dbus_next import BusType
-from org.acmsl.artifact.events.infrastructure.licdata.dbus import (
+from pythoneda.shared.artifact.events import DockerImageAvailable
+from pythoneda.shared.artifact.events.infrastructure.dbus import (
     DbusDockerImageAvailable,
 )
-from org.acmsl.artifact.events.licdata import DockerImageAvailable
 from pythoneda.shared.infrastructure.dbus import DbusSignalEmitter
 from typing import Dict
 
@@ -40,7 +40,7 @@ class LicdataArtifactDbusSignalEmitter(DbusSignalEmitter):
 
     Collaborators:
         - pythoneda.shared.application.PythonEDA: Requests emitting events.
-        - org.acmsl.artifact.events.infrastructure.infrastructure.dbus.DbusDockerImageAvailable
+        - pythoneda.shared.artifact.events.infrastructure.infrastructure.dbus.DbusDockerImageAvailable
     """
 
     def __init__(self):
