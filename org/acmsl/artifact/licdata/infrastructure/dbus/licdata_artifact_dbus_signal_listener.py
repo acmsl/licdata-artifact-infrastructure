@@ -47,7 +47,7 @@ class LicdataArtifactDbusSignalListener(DbusSignalListener):
         """
         Creates a new LicdataArtifactDbusSignalListener instance.
         """
-        super().__init__("org.acmsl.artifact.events.infrastructure.licdata.dbus")
+        super().__init__("pythoneda.shared.artifact.events.infrastructure.dbus")
 
     def signal_receivers(self, app) -> Dict:
         """

@@ -47,7 +47,7 @@ class LicdataArtifactDbusSignalEmitter(DbusSignalEmitter):
         """
         Creates a new LicdataArtifactDbusSignalEmitter instance.
         """
-        super().__init__()
+        super().__init__("pythoneda.shared.artifact.events.infrastructure.dbus")
 
     def signal_emitters(self) -> Dict:
         """
@@ -57,7 +57,7 @@ class LicdataArtifactDbusSignalEmitter(DbusSignalEmitter):
         """
         result = {}
         key = self.__class__.full_class_name(DockerImageAvailable)
-        result[key] = [DbusDockerImagesAvailable, BusType.SYSTEM]
+        result[key] = [DbusDockerImageAvailable, BusType.SYSTEM]
 
         return result
 
