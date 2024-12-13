@@ -25,6 +25,15 @@ from pythoneda.shared.artifact.events.infrastructure.dbus import (
     DbusDockerImageRequested,
 )
 from pythoneda.shared.infrastructure.dbus import DbusSignalListener
+from pythoneda.shared.runtime.secrets.events import (
+    CredentialProvided,
+    CredentialRequested,
+)
+from pythoneda.shared.runtime.secrets.events.infrastructure.dbus import (
+    DbusCredentialProvided,
+    DbusCredentialRequested,
+)
+
 from typing import Dict
 
 
@@ -60,6 +69,11 @@ class LicdataArtifactDbusSignalListener(DbusSignalListener):
         result = {}
         key = self.__class__.full_class_name(DockerImageRequested)
         result[key] = [DbusDockerImageRequested, BusType.SYSTEM]
+        key = self.__class__.full_class_name(CredentialProvided)
+        result[key] = [DbusCredentialProvided, BusType.SYSTEM]
+        key = self.__class__.full_class_name(CredentialRequested)
+        result[key] = [DbusCredentialRequested, BusType.SYSTEM]
+
         return result
 
 
