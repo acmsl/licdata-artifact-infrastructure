@@ -71,8 +71,6 @@ class LicdataArtifactDbusSignalListener(DbusSignalListener):
         result[key] = [DbusDockerImageRequested, BusType.SYSTEM]
         key = self.__class__.full_class_name(CredentialProvided)
         result[key] = [DbusCredentialProvided, BusType.SYSTEM]
-        key = self.__class__.full_class_name(CredentialRequested)
-        result[key] = [DbusCredentialRequested, BusType.SYSTEM]
 
         return result
 
