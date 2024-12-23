@@ -19,17 +19,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-from dbus_next import BusType
-from pythoneda.shared.artifact.events import DockerImageAvailable
-from pythoneda.shared.artifact.events.infrastructure.dbus import (
-    DbusDockerImageAvailable,
-)
 from pythoneda.shared.infrastructure.dbus import DbusSignalEmitter
-from pythoneda.shared.runtime.secrets.events import CredentialRequested
-from pythoneda.shared.runtime.secrets.events.infrastructure.dbus import (
-    DbusCredentialRequested,
-)
-from typing import Dict
+from typing import List
 
 
 class LicdataArtifactDbusSignalEmitter(DbusSignalEmitter):
@@ -43,29 +34,28 @@ class LicdataArtifactDbusSignalEmitter(DbusSignalEmitter):
         - Emit licdata-artifact events as d-bus signals.
 
     Collaborators:
-        - pythoneda.shared.application.PythonEDA: Requests emitting events.
-        - pythoneda.shared.artifact.events.infrastructure.infrastructure.dbus.DbusDockerImageAvailable
+        - pythoneda.shared.infrastructure.dbus.DbusSignalEmitter: Inherits from DbusSignalEmitter.
+        - pythoneda.shared.artifact.events.infrastructure.dbus events
+        - pythoneda.shared.runtime.secrets.events.infrastructure.dbus events
     """
 
     def __init__(self):
         """
         Creates a new LicdataArtifactDbusSignalEmitter instance.
         """
-        super().__init__("pythoneda.shared.artifact.events.infrastructure.dbus")
+        super().__init__()
 
-    def signal_emitters(self) -> Dict:
+    @classmethod
+    def event_packages(cls) -> List[str]:
         """
-        Retrieves the configured event emitters.
-        :return: For each event, a list with the event interface and the bus type.
-        :rtype: Dict
+        Retrieves the packages of the supported events.
+        :return: The packages.
+        :rtype: List[str]
         """
-        result = {}
-        key = self.__class__.full_class_name(DockerImageAvailable)
-        result[key] = [DbusDockerImageAvailable, BusType.SYSTEM]
-        key = self.__class__.full_class_name(CredentialRequested)
-        result[key] = [DbusCredentialRequested, BusType.SYSTEM]
-
-        return result
+        return [
+            "pythoneda.shared.artifact.events.infrastructure.dbus",
+            "pythoneda.shared.runtime.secrets.events.infrastructure.dbus",
+        ]
 
 
 # vim: syntax=python ts=4 sw=4 sts=4 tw=79 sr et
