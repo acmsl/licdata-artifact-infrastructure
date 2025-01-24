@@ -1,8 +1,8 @@
 # vim: set fileencoding=utf-8
 """
-org/acmsl/artifact/licdata/infrastructure/cli/request_docker_image_pushed_cli.py
+org/acmsl/artifact/licdata/infrastructure/cli/request_docker_image_cli.py
 
-This file defines the RequestDockerImagePushedCli class.
+This file defines the RequestDockerImage class.
 
 Copyright (C) 2024-today acmsl's Licdata Artifact Infrastructure
 
@@ -24,14 +24,14 @@ from pythoneda.shared import PrimaryPort, PythonedaApplication
 from pythoneda.shared.infrastructure.cli import CliHandler
 
 
-class RequestDockerImagePushedCli(CliHandler, PrimaryPort):
+class RequestDockerImageCli(CliHandler, PrimaryPort):
     """
-    A PrimaryPort used to request pushing the Docker image.
+    A PrimaryPort used to request a Docker image.
 
-    Class name: RequestDockerImagePushedCli
+    Class name: RequestDockerImage
 
     Responsibilities:
-        - Parse the command-line to retrieve the push request.
+        - Parse the command-line to retrieve the request.
 
     Collaborators:
         - org.acmsl.artifact.licdata.application.LicdataIacApp: It's notified back with the information retrieved from the command line.
@@ -39,7 +39,7 @@ class RequestDockerImagePushedCli(CliHandler, PrimaryPort):
 
     def __init__(self):
         """
-        Creates a new RequestDockerImagePushedCli instance.
+        Creates a new RequestDockerImage instance.
         """
         super().__init__("Provide the Docker image options")
 
@@ -113,7 +113,7 @@ class RequestDockerImagePushedCli(CliHandler, PrimaryPort):
         :param args: The CLI args.
         :type args: argparse.args
         """
-        await app.accept_docker_image_push_requested(
+        await app.accept_docker_image_requested(
             {
                 "image_version": args.image_version,
                 "docker_registry_url": args.docker_registry_url,
